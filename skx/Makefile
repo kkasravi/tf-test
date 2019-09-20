@@ -1,4 +1,4 @@
-IMG=gcr.io/constant-cubist-173123/tf-test
+IMG=gcr.io/constant-cubist-173123/tf-test-skx
 TAG ?= $(eval TAG := $(shell git describe --tags --long --always))$(TAG)
 
 all: build
