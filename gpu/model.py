@@ -11,6 +11,7 @@ import tensorflow_datasets as tfds
 from tensorflow.python.keras import backend
 from tensorflow.python.keras import layers
 
+with tf.python.profiler.Profiler('logdir_path'):
 import numpy as np
 
 print("TensorFlow version: ", tf.__version__)
@@ -324,7 +325,7 @@ model.compile(optimizer='SGD',
 
 log_dir="logs/profile/" + datetime.now().strftime("%Y%m%d-%H%M%S")
 
-tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1, profile_batch = 3)
+tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1, profile_batch=3)
 
 model.fit(train_data,
           steps_per_epoch=20,
