@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: resnet-tpu
+spec:
+  template:
+    metadata:
+      annotations:
+        # The Cloud TPUs that will be created for this Job must support
+        # TensorFlow 1.14. This version MUST match
+        # the TensorFlow version that your model is built on.
+        tf-version.cloud-tpus.google.com: "1.14"
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: resnet-tpu
+        # The official TensorFlow 1.14 TPU model image built from
+        # https://github.com/tensorflow/tpu/blob/r1.14/tools/docker/Dockerfile.
+        image: gcr.io/tensorflow/tpu-models:r1.14
+        command:
+        - python
+        - /tensorflow_tpu_models/models/official/resnet/resnet_main.py
+        - --data_dir=gs://cloud-tpu-test-datasets/fake_imagenet
+        - --model_dir=gs://kdkasrav/resnet
+        env:
+        # Point PYTHONPATH to the top level models folder
+        - name: PYTHONPATH
+          value: "/tensorflow_tpu_models/models"
+        resources:
+          limits:
+            # Request a single preemptible-v2-8 Cloud TPU device to train the model.
+            cloud-tpus.google.com/v2: 8
