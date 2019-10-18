@@ -32,7 +32,7 @@ spec:
           # See https://cloud.google.com/tpu/docs/kubernetes-engine-setup to
           # get the name of the Cloud TPU used by your pod.
         - name: TPU_NAME
-          value: gke-tpu-models-cluster-0cead117-tpu-7efa1576
+          value: gke-tpu-models-cluster-11561158-tpu-01bdee94
           # [REQUIRED] Must specify the Google Cloud Storage location where
           # your output model and TensorFlow events are stored.
         - name: MODEL_BUCKET
