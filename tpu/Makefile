@@ -13,22 +13,31 @@
 # limitations under the License.
 #
 GCLOUD_PROJECT ?= constant-cubist-173123
+TPU ?= gcr.io/$(GCLOUD_PROJECT)/tpu
 TPU_UTIL ?= gcr.io/$(GCLOUD_PROJECT)/tpu-util
 TAG ?= $(eval TAG := $(shell git describe --tags --long --always))$(TAG)
 
-all: build
+all: build build_utils
 
 build:
-	DOCKER_BUILDKIT=1 docker build --tag $(TPU_UTIL):$(TAG) .
+	DOCKER_BUILDKIT=1 docker build --target build --tag $(TPU):$(TAG) .
+	@echo Built $(TPU):$(TAG)
+
+build_utils:
+	DOCKER_BUILDKIT=1 docker build --target build_utils --tag $(TPU_UTIL):$(TAG) .
 	@echo Built $(TPU_UTIL):$(TAG)
 
 # Build but don't attach the latest tag. This allows manual testing/inspection of the image
 # first.
-push: build
+push: build build_utils
+	docker push $(TPU):$(TAG)
+	@echo Pushed $(TPU):$(TAG)
 	docker push $(TPU_UTIL):$(TAG)
 	@echo Pushed $(TPU_UTIL):$(TAG)
 
 push-latest: push
+	gcloud container images add-tag --quiet $(TPU):$(TAG) $(TPU):latest --verbosity=info
+	echo created $(TPU):latest
 	gcloud container images add-tag --quiet $(TPU_UTIL):$(TAG) $(TPU_UTIL):latest --verbosity=info
 	echo created $(TPU_UTIL):latest
 

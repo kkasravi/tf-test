@@ -14,18 +14,16 @@ spec:
       restartPolicy: Never
       containers:
       - name: resnet-tpu
-        # The official TensorFlow 1.14 TPU model image built from
-        # https://github.com/tensorflow/tpu/blob/r1.14/tools/docker/Dockerfile.
-        image: gcr.io/tensorflow/tpu-models:r1.14
-        command:
-        - python
-        - /tensorflow_tpu_models/models/official/resnet/resnet_main.py
-        - --data_dir=gs://cloud-tpu-test-datasets/fake_imagenet
-        - --model_dir=gs://kdkasrav/resnet
+        image: gcr.io/constant-cubist-173123/tpu:15e417a
+        command: ["/bin/sleep", "infinity"]
+        #command:
+        #- python
+        #- /tensorflow_tpu_models/resnet/resnet_main.py
+        #- --data_dir=gs://cloud-tpu-test-datasets/fake_imagenet
+        #- --model_dir=gs://kdkasrav/resnet
         env:
-        # Point PYTHONPATH to the top level models folder
         - name: PYTHONPATH
-          value: "/tensorflow_tpu_models/models"
+          value: "/tensorflow_tpu_models"
         resources:
           limits:
             # Request a single preemptible-v2-8 Cloud TPU device to train the model.

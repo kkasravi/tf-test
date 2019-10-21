@@ -20,8 +20,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: tpu-profiler
-        # The official TensorFlow 1.14 TPU utility image built from https://github.com/tensorflow/tpu/blob/r1.14/tools/docker/Dockerfile.util.
-        image: gcr.io/constant-cubist-173123/tpu-util:6413007
+        image: gcr.io/constant-cubist-173123/tpu-util@sha256:073069b9cbeb81a9d7eceea12d9784157a0a2abd0e7da116644432cf9338a5b4
         command:
         - capture_tpu_profile
         - --tpu=$(TPU_NAME)
@@ -32,11 +31,11 @@ spec:
           # See https://cloud.google.com/tpu/docs/kubernetes-engine-setup to
           # get the name of the Cloud TPU used by your pod.
         - name: TPU_NAME
-          value: gke-tpu-models-cluster-11561158-tpu-01bdee94
+          value: gke-tpu-models-cluster-affa7e90-tpu-b672ceff
           # [REQUIRED] Must specify the Google Cloud Storage location where
           # your output model and TensorFlow events are stored.
         - name: MODEL_BUCKET
           value: gs://kdkasrav/resnet
           # How long the profiling should last (in millisecond).
         - name: TRACING_DURATION_IN_MS
-          value: "3000"
+          value: "10000"
