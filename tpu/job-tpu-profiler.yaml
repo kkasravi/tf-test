@@ -20,7 +20,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: tpu-profiler
-        image: gcr.io/constant-cubist-173123/tpu-util:dfadb22
+        image: gcr.io/constant-cubist-173123/tpu-util:7e99388
         command:
         - capture_tpu_profile
         - --tpu=$(TPU_NAME)
