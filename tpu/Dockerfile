@@ -62,7 +62,7 @@ RUN apt-get update && apt-get install -y \
 # Checkout tensorflow/models at the appropriate branch
 COPY . /tensorflow_tpu_models
 WORKDIR /tensorflow_tpu_models
-RUN ./run-resnet.sh
+RUN ./env-resnet.sh
 
 #RUN git clone -b r1.14 --depth 1 https://github.com/tensorflow/models.git /tensorflow_models
 
