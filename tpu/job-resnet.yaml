@@ -14,7 +14,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: resnet-tpu
-        image: gcr.io/constant-cubist-173123/tpu:03e4669
+        image: gcr.io/constant-cubist-173123/tpu:dfadb22
         workingDir: /tensorflow_tpu_models
         #command: ["/bin/sleep", "infinity"]
         command: ["./run-resnet.sh"]
