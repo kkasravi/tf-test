@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mnist-tpu
+spec:
+  template:
+    metadata:
+      annotations:
+        # The Cloud TPUs that will be created for this Job must support
+        # TensorFlow 1.14. This version MUST match
+        # the TensorFlow version that your model is built on.
+        tf-version.cloud-tpus.google.com: "1.14"
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: mnist-tpu
+        image: gcr.io/constant-cubist-173123/tpu:c86652c
+        workingDir: /tensorflow_tpu_models
+        #command: ["/bin/sleep", "infinity"]
+        #command: ["./run-mnist.sh"]
+        env:
+        - name: PYTHONPATH
+          value: "/tensorflow_tpu_models"
+          # [REQUIRED] Must specify the name of the Cloud TPU.
+          # See https://cloud.google.com/tpu/docs/kubernetes-engine-setup to
+          # get the name of the Cloud TPU used by your pod.
+        - name: TPU_NAME
+          value: gke-tpu-models-cluster-16c86d6d-tpu-b938c8a7
+          # [REQUIRED] Must specify the Google Cloud Storage location where
+          # your output model and TensorFlow events are stored.
+        - name: STORAGE_BUCKET
+          value: gs://kdkasrav
+          # How long the profiling should last (in millisecond).
+        resources:
+          limits:
+            # Request a single preemptible-v2-8 Cloud TPU device to train the model.
+            cloud-tpus.google.com/v2: 8

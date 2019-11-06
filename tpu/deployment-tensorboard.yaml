@@ -29,7 +29,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: tensorboard
-        image: gcr.io/constant-cubist-173123/tpu-util:7e99388
+        image: gcr.io/constant-cubist-173123/tpu-util:c86652c
         command:
         - tensorboard
         - --logdir=$(MODEL_BUCKET)

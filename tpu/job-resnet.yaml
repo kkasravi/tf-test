@@ -14,15 +14,10 @@ spec:
       restartPolicy: Never
       containers:
       - name: resnet-tpu
-        image: gcr.io/constant-cubist-173123/tpu:7e99388
+        image: gcr.io/constant-cubist-173123/tpu:c86652c
         workingDir: /tensorflow_tpu_models
         #command: ["/bin/sleep", "infinity"]
         command: ["./run-resnet.sh"]
-        #command:
-        #- python
-        #- resnet/resnet_main.py
-        #- --data_dir=gs://cloud-tpu-test-datasets/fake_imagenet
-        #- --model_dir=gs://kdkasrav/resnet
         env:
         - name: PYTHONPATH
           value: "/tensorflow_tpu_models"
