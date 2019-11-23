@@ -2,10 +2,12 @@
 if [[ -z $PYENV_ROOT && -f $HOME/.profile ]]; then
   source $HOME/.profile
 fi
-pyenv install 3.7.4
-pyenv virtualenv 3.7.4 tpu
-pyenv local tpu
-pyenv global tpu
+venv=$(pyenv virtualenvs|grep '^*'|awk '{print $2}')
+if [[ $venv != "tpu" ]]; then
+  pyenv install 3.7.4
+  pyenv virtualenv 3.7.4 tpu
+  pyenv local tpu
+fi
 pip install pipenv
 pipenv install absl-py
 pipenv install pyyaml

@@ -19,6 +19,9 @@ TAG ?= $(eval TAG := $(shell git describe --tags --long --always))$(TAG)
 
 all: build build_utils
 
+venv:
+	./env-model.sh
+
 build:
 	DOCKER_BUILDKIT=1 docker build --target build --tag $(TPU):$(TAG) .
 	@echo Built $(TPU):$(TAG)
