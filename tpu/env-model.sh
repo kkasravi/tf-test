@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-if [[ -z $PYENV_ROOT ]]; then
+if [[ -z $PYENV_ROOT && -f $HOME/.profile ]]; then
   source $HOME/.profile
 fi
 pyenv install 3.7.4
@@ -14,3 +14,4 @@ pipenv install tensorflow==1.14
 pipenv install google-cloud-storage
 pipenv install google-api-python-client
 pipenv install oauth2client
+pipenv install packaging

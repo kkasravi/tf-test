@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
-if [[ -z $PYENV_ROOT ]]; then
+if [[ -z $PYENV_ROOT && -f $HOME/.profile ]]; then
   source $HOME/.profile
 fi
 pyenv install 3.6.8
-pyenv virtualenv 3.6.8 tpu
-pyenv local tpu
-pyenv global tpu
+pyenv virtualenv 3.6.8 gpu
+pyenv local gpu
 pip install pipenv
 pipenv install absl-py
 pipenv install pyyaml

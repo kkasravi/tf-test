@@ -7,6 +7,7 @@ from packaging import version
 
 import tensorflow as tf
 from tensorflow import keras
+from tensorflow import hooks
 
 print("TensorFlow version: ", tf.__version__)
 assert version.parse(tf.__version__).release[0] >= 2, \
@@ -36,6 +37,8 @@ logdir="logs/fit/" + datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = keras.callbacks.TensorBoard(log_dir=logdir)
 
 # Train the model.
+profiler_hook = hooks.ProfilerHook(save_steps=10, output_dir=args.job_dir)
+
 model.fit(
     train_images,
     train_labels, 

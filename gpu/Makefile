@@ -6,6 +6,9 @@ all: build
 auth:
 	docker login  -u "user" -p "password" docker.io
 
+venv:
+	./env-model.sh
+
 build:
 	DOCKER_BUILDKIT=1 docker build --tag $(IMG):$(TAG) .
 	@echo Built $(IMG):$(TAG)
