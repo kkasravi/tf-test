@@ -9,7 +9,7 @@ verify_ssl = true
 absl-py = "*"
 pyyaml = "*"
 wheel = "*"
-tensorflow = "==1.14"
+tensorflow = "==1.15.2"
 google-cloud-storage = "*"
 google-api-python-client = "*"
 oauth2client = "*"
