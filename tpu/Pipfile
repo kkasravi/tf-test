@@ -8,7 +8,7 @@ verify_ssl = true
 [packages]
 absl-py = "*"
 numpy = "*"
-tensorflow = "==1.14"
+tensorflow = "==1.15.4"
 pyyaml = "*"
 wheel = "*"
 google-cloud-storage = "*"
